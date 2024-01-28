@@ -1,4 +1,5 @@
 // Copyright (c) HashiCorp, Inc.
+// Copyright (c) Jan Martens <jan@martens.eu.org>
 // SPDX-License-Identifier: MPL-2.0
 
 package main
@@ -6,9 +7,9 @@ package main
 import (
 	"os"
 
+	"github.com/JanMa/openbao-plugin-secrets-nomad/nomad"
 	hclog "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/vault/api"
-	"github.com/hashicorp/vault/builtin/logical/nomad"
 	"github.com/hashicorp/vault/sdk/plugin"
 )
 
