@@ -1,4 +1,5 @@
 // Copyright (c) HashiCorp, Inc.
+// Copyright (c) Jan Martens <jan@martens.eu.org>
 // SPDX-License-Identifier: MPL-2.0
 
 package nomad
@@ -6,6 +7,7 @@ package nomad
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"os"
 	"reflect"
 	"strings"
@@ -13,7 +15,6 @@ import (
 	"time"
 
 	nomadapi "github.com/hashicorp/nomad/api"
-	"github.com/hashicorp/vault/helper/testhelpers"
 	"github.com/hashicorp/vault/sdk/helper/docker"
 	"github.com/hashicorp/vault/sdk/logical"
 	"github.com/mitchellh/mapstructure"
@@ -37,6 +38,12 @@ func (c *Config) Client() (*nomadapi.Client, error) {
 	return nomadapi.NewClient(apiConfig)
 }
 
+// RandomWithPrefix is used to generate a unique name with a prefix, for
+// randomizing names in acceptance tests
+func RandomWithPrefix(name string) string {
+	return fmt.Sprintf("%s-%d", name, rand.New(rand.NewSource(time.Now().UnixNano())).Int())
+}
+
 func prepareTestContainer(t *testing.T, bootstrap bool) (func(), *Config) {
 	if retAddress := os.Getenv("NOMAD_ADDR"); retAddress != "" {
 		s, err := docker.NewServiceURLParse(retAddress)
@@ -47,12 +54,12 @@ func prepareTestContainer(t *testing.T, bootstrap bool) (func(), *Config) {
 	}
 
 	runner, err := docker.NewServiceRunner(docker.RunOptions{
-		ImageRepo:     "docker.mirror.hashicorp.services/multani/nomad",
-		ImageTag:      "1.1.6",
+		ImageRepo:     "hashicorp/nomad",
+		ImageTag:      "1.6.3",
 		ContainerName: "nomad",
 		Ports:         []string{"4646/tcp"},
-		Cmd:           []string{"agent", "-dev"},
-		Env:           []string{`NOMAD_LOCAL_CONFIG=bind_addr = "0.0.0.0" acl { enabled = true }`},
+		Entrypoint:    []string{"/bin/nomad"},
+		Cmd:           []string{"agent", "-dev", "-acl-enabled", "-bind=0.0.0.0"},
 	})
 	if err != nil {
 		t.Fatalf("Could not start docker Nomad: %s", err)
@@ -548,7 +555,7 @@ func TestBackend_max_token_name_length(t *testing.T) {
 			if tc.roleName == "" {
 				tc.roleName = "test"
 			}
-			roleTokenName := testhelpers.RandomWithPrefix(tc.roleName)
+			roleTokenName := RandomWithPrefix(tc.roleName)
 
 			confReq.Path = "role/" + roleTokenName
 			confReq.Operation = logical.UpdateOperation
