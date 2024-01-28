@@ -1,25 +1,17 @@
----
-layout: api
-page_title: Nomad Secrets Engine- HTTP API
-description: This is the API documentation for the Vault Nomad secrets engine.
----
-
 # Nomad secrets engine (API)
 
-@include 'x509-sha1-deprecation.mdx'
-
-This is the API documentation for the Vault Nomad secrets engine. For general
+This is the API documentation for the OpenBao Nomad secrets engine. For general
 information about the usage and operation of the Nomad secrets engine, please see the
-[Vault Nomad secrets engine documentation](/vault/docs/secrets/nomad).
+[documentation](../readme.md).
 
 This documentation assumes the Nomad secrets engine is mounted at the `/nomad` path
-in Vault. Since it is possible to mount secrets engines at any location, please
+in OpenBao. Since it is possible to mount secrets engines at any location, please
 update your API calls accordingly.
 
 ## Configure access
 
 This endpoint configures the access information for Nomad. This access
-information is used so that Vault can communicate with Nomad and generate
+information is used so that OpenBao can communicate with Nomad and generate
 Nomad tokens.
 
 | Method | Path                   |
@@ -107,9 +99,9 @@ This endpoint configures the lease settings for generated tokens.
 
 ### Parameters
 
-- `ttl` `(string: "")` – Specifies the ttl for the lease. Uses [duration format strings](/vault/docs/concepts/duration-format).
+- `ttl` `(string: "")` – Specifies the ttl for the lease. Uses duration format strings.
 
-- `max_ttl` `(string: "")` – Specifies the max ttl for the lease. Uses [duration format strings](/vault/docs/concepts/duration-format).
+- `max_ttl` `(string: "")` – Specifies the max ttl for the lease. Uses duration format strings.
 
 ### Sample payload
 
@@ -174,7 +166,7 @@ $ curl \
 
 ## Create/Update role
 
-This endpoint creates or updates the Nomad role definition in Vault. If the role does not exist, it will be created. If the role already exists, it will receive
+This endpoint creates or updates the Nomad role definition in OpenBao. If the role does not exist, it will be created. If the role already exists, it will receive
 updated attributes.
 
 | Method | Path                |
@@ -188,7 +180,7 @@ updated attributes.
 
 - `policies` `(string: "")` – Comma separated list of Nomad policies the token is going to be created against. These need to be created beforehand in Nomad.
 
-- `global` `(bool: "false")` – Specifies if the token should be global, as defined in the [Nomad Documentation](/nomad/tutorials/access-control#acl-tokens).
+- `global` `(bool: "false")` – Specifies if the token should be global, as defined in the Nomad Documentation.
 
 - `type` `(string: "client")` - Specifies the type of token to create when
   using this role. Valid values are `"client"` or `"management"`.
