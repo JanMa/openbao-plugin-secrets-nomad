@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CHANGELOG file
 - automated released with goreleaser
 - run test suite on every commit
+- project README
 
 ### Fixed
 
