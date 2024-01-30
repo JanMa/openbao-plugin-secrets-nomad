@@ -14,6 +14,8 @@ import (
 
 const operationPrefixNomad = "nomad"
 
+var pluginVersion string
+
 // Factory returns a Nomad backend that satisfies the logical.Backend interface
 func Factory(ctx context.Context, conf *logical.BackendConfig) (logical.Backend, error) {
 	b := Backend()
@@ -44,7 +46,8 @@ func Backend() *backend {
 		Secrets: []*framework.Secret{
 			secretToken(&b),
 		},
-		BackendType: logical.TypeLogical,
+		BackendType:    logical.TypeLogical,
+		RunningVersion: pluginVersion,
 	}
 
 	return &b

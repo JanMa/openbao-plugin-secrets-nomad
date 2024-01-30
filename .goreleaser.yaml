@@ -11,6 +11,8 @@ builds:
       - linux
       - windows
       - darwin
+    ldflags:
+      - -s -w -X github.com/JanMa/openbao-plugin-secrets-nomad/nomad.pluginVersion={{.Version}}
 
 archives:
   - format: tar.gz
