@@ -15,9 +15,9 @@ import (
 	"time"
 
 	nomadapi "github.com/hashicorp/nomad/api"
-	"github.com/hashicorp/vault/sdk/helper/docker"
-	"github.com/hashicorp/vault/sdk/logical"
 	"github.com/mitchellh/mapstructure"
+	"github.com/openbao/openbao/sdk/helper/docker"
+	"github.com/openbao/openbao/sdk/logical"
 )
 
 type Config struct {

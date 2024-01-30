@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - replace Vault with OpenBao in documentation
+- use OpenBao go packages
 
 
 ### Other
