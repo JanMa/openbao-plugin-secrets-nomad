@@ -1,4 +1,5 @@
 // Copyright (c) HashiCorp, Inc.
+// Copyright (c) Jan Martens <jan@martens.eu.org>
 // SPDX-License-Identifier: MPL-2.0
 
 package nomad
@@ -8,8 +9,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/hashicorp/vault/sdk/framework"
-	"github.com/hashicorp/vault/sdk/logical"
+	"github.com/openbao/openbao/sdk/framework"
+	"github.com/openbao/openbao/sdk/logical"
 )
 
 func pathListRoles(b *backend) *framework.Path {
