@@ -1,5 +1,9 @@
 # OpenBao Plugin: Nomad Secrets Backend
 
+> [!IMPORTANT]  
+> The Nomad Secrets Backend plugin was transferred to the [openbao/openbao-plugins](https://github.com/openbao/openbao-plugins) repository.
+> This repository is now archived.
+
 This is a standalone backend plugin for use with
 [OpenBao](https://www.github.com/openbao/openbao).  This plugin generates Nomad
 ACL tokens dynamically based on pre-existing Nomad ACL policies.
